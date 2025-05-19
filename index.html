@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mis Proyectos</title>
+  <link rel="icon" href="icono.png" type="logo-Zave_rn">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fffdf8;
+      --text: #2c2c2c;
+      --accent: #e26d5a; 
+      --soft-blue: #89c2d9;
+      --card: #ffffff;
+      --shadow: rgba(220, 170, 120, 0.1);
+      --border: #f1e9e3;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 3rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2.75rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    p.subtitle {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 2.5rem;
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    .card {
+      background-color: var(--card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 24px var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid var(--border);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 28px rgba(226, 109, 90, 0.15);
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--soft-blue);
+      font-weight: 600;
+    }
+
+    .card a {
+      display: block;
+      margin: 0.5rem 0;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .card a:hover {
+      color: var(--accent);
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #999;
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      p.subtitle {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<h1>Mis poemas</h1>
+  <p class="subtitle">Frases y poemas que vibran entre líneas de código y pulsos del alma</p>
+
+    <div class="card">
+      <h2>Ecos del Silicio</h2>
+      <a href="mis  poemas.html">Versos en código, alma en la red.</a>
+      <a href="503 en servicio.html">Fragmentos de Luz</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Hecho por Emiliano Hernandez Navarrete💙</p>
+  </footer>
+</body>
+</html>
