@@ -238,11 +238,23 @@
   </div>
 
   <script>
-    function reproducir(texto) {
-      const voz = new SpeechSynthesisUtterance(texto);
-      voz.lang = "es-MX";
-      speechSynthesis.speak(voz);
-    }
+    let hablando = false;
+
+function reproducir(texto) {
+  if (hablando) return; 
+
+  speechSynthesis.cancel(); 
+
+  const voz = new SpeechSynthesisUtterance(texto);
+  voz.lang = "es-MX";
+
+  hablando = true;
+  voz.onend = () => {
+    hablando = false;
+  };
+
+  speechSynthesis.speak(voz);
+}
 
     function toggleTheme() {
       const body = document.body;
