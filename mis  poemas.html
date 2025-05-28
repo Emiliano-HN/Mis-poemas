@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mis Poemas</title>
+  <link rel="icon" href="icono.png" type="logo-Zave_rn">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tsparticles/3.0.3/tsparticles.bundle.min.js"></script>
+  <style>
+    :root {
+      --text: #1e1e1e;
+      --card-bg: #ffffff;
+      --accent: #4a90e2;
+      --accent-personalizado: #ad8a1f;
+      --accent-gold: #ad8a1f;
+      --accent-memoria: #9b9b9b;
+      --accent-memoria-3: #9b9b9b;
+      --bg-gradient: linear-gradient(to bottom, #f1f4f9, #d6e0f5);
+      --particle-color: #4a90e2;
+    }
+
+    [data-theme="dark"] {
+      --text: #e0e0e0;
+      --card-bg: #181818;
+      --accent: #84b8ff;
+      --accent-personalizado-2: #ad8a1f;
+      --accent-memoria-2: #9b9b9b;
+      --bg-gradient: linear-gradient(to bottom, #0a0a0a, #121212);
+      --particle-color: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg-gradient);
+      padding: 2rem;
+      transition: background 1s ease, color 0.5s ease;
+      position: relative;
+      min-height: 100vh;
+      user-select: none;
+      -webkit-user-select: none; 
+      -moz-user-select: none; 
+      -ms-user-select: none;
+    }
+    
+    #tsparticles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none; 
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 2; 
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .frase {
+      font-style: italic;
+      color: #999;
+      font-size: 1.1rem;
+    }
+
+    .toggle-theme {
+      background: none;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-top: 1.5rem;
+    }
+
+    .toggle-theme-personalizado {
+      background: none;
+      border: 2px solid var(--accent-personalizado);
+      color: var(--accent-gold);
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-top: 1.5rem;
+    }
+
+    .toggle-theme-memoria {
+      background: none;
+      border: 2px solid var(--accent-memoria);
+      color: var(--accent-memoria-3);
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-top: 1.5rem;
+    }
+
+    .toggle-theme:hover {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .toggle-theme-personalizado:hover {
+      background: var(--accent-personalizado);
+      color: white;
+      box-shadow: 0 0 10px var(--accent-personalizado-2);
+    }
+
+    .toggle-theme-memoria:hover {
+      background: var(--accent-memoria);
+      color: white;
+      box-shadow: 0 0 10px var(--accent-memoria-2);
+    }
+
+    .search-container {
+      position: relative;
+      max-width: 600px;
+      margin: 2rem auto 3rem;
+      z-index: 3; 
+    }
+
+    #busqueda {
+      display: block;
+      padding: 0.7rem 1rem;
+      width: 100%;
+      font-size: 1rem;
+      border: 2px solid var(--accent);
+      border-radius: 999px;
+      outline: none;
+      background-color: var(--card-bg);
+      color: var(--text);
+      padding-left: 45px;
+      transition: all 0.3s ease;
+    }
+
+    #busqueda:focus {
+      box-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
+      border-color: var(--accent);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+    
+    .poema {
+      background-color: var(--card-bg);
+      border-left: 5px solid var(--accent);
+      border-radius: 14px;
+      padding: 2rem;
+      margin: 2.5rem auto;
+      max-width: 750px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .poema:hover {
+      transform: scale(1.015);
+      box-shadow: 0 20px 40px #4a90e2;
+    }
+
+    .poema.gold:hover {
+      transform: scale(1.015);
+      box-shadow: 0 20px 40px #ad8a1f;
+    }
+
+    .poema.memoria:hover {
+      transform: scale(1.015);
+      box-shadow: 0 20px 40px #9b9b9b;
+    }
+
+    .poema .highlight {
+      background-color: rgba(74, 144, 226, 0.3);
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+
+    .titulo {
+      font-size: 1.9rem;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1.2rem;
+      color: var(--accent);
+    }
+
+    .titulo-personalizado {
+      font-size: 1.9rem;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1.2rem;
+      color: var(--accent-personalizado);
+    }
+
+    .titulo-personalizado {
+      font-size: 1.9rem;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1.2rem;
+      color: var(--accent-memoria);
+    }
+
+    .texto {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+
+    footer {
+      text-align: center;
+      color: #888;
+      font-size: 0.9rem;
+      margin-top: 5rem;
+      position: relative;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .poema {
+        padding: 1.5rem;
+      }
+
+      .titulo {
+        font-size: 1.6rem;
+      }
+    }
+    .poema.gold {
+      background-color: var(--card-bg);
+      border-left: 5px solid var(--accent-gold);
+      border-radius: 14px;
+      padding: 2rem;
+      margin: 2.5rem auto;
+      max-width: 750px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .poema.memoria {
+      background-color: var(--card-bg);
+      border-left: 5px solid var(--accent-memoria);
+      border-radius: 14px;
+      padding: 2rem;
+      margin: 2.5rem auto;
+      max-width: 750px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <div id="tsparticles"></div>
+  
+  <div class="content-wrapper">
+    <header>
+      <h1>Mis Poemas</h1>
+      <div class="frase">"Te amé antes de saber tu nombre, como la luna ama al mar sin conocer su rostro, solo sintiendo que sin él, su luz no tendría propósito."</div>
+      <button class="toggle-theme" onclick="toggleTheme()">Cambiar Tema</button>
+    </header>
+
+    <div class="search-container">
+      <div class="search-icon">🔍</div>
+      <input type="text" id="busqueda" placeholder="Escribe para buscar poemas..." autocomplete="off">
+    </div>
+
+    <div class="poema memoria">
+      <div class="titulo-personalizado">En la memoria del alma</div>
+      <div class="texto">
+      No te vi jamás en carne,
+      pero en el viento escuché
+      tu voz firme, tu mirada,
+      la luz que nunca se fue.
+
+        Maestra de silencios,
+        que faltó regañar quizás,
+        pero enseñaste con alma
+        más de lo que se puede hablar.
+
+        Quisiste guiar caminos,
+        abrir puertas y sembrar,
+        y aunque el tiempo te llevó
+        tu esencia no va a acabar.
+
+        Porque no se olvida lo grande,
+        ni el amor que supiste dar,
+        la huella que dejaste en el alma,
+        permanecerá sin cesar.
+
+        Fuiste faro en la noche,
+        luz que no sabe morir,
+        maestra que en el recuerdo
+        sigue siempre por venir.
+
+        No estás, pero no te pierdes,
+        tu nombre es inmortal,
+        y en cada corazón que tocaste,
+        vivirás sin final.
+<button class="toggle-theme-memoria" id="Enlamemoriadelalma">Audio del poema</button> 
+      </div>
+    </div>
+
+    <div class="poema gold">
+      <div class="titulo-personalizado">El peor poema del mundo</div>
+      <div class="texto">
+        Dicen que esto no es amor.
+        Que es exceso. Que arde. Que enferma.
+        Que nadie puede amar así, sin defensa,
+        sin juicio, sin pausa, sin tregua.
+        
+        Pero yo te amo como nadie jamás te soñó,
+        no como un poeta,
+        sino como un universo que colapsa si no estás.
+        
+        Te amo sin metáforas.
+        Te amo sin "como".
+        Te amo más allá de las palabras que inventó el idioma.
+        
+        Te amo cuando no estás,
+        cuando no me recuerdas,
+        cuando tu sombra toca otra cama…
+        y aún así me hundo con los ojos cerrados
+        en el sabor imposible de tu nombre.
+        
+        Olvida a Neruda,
+        a Benedetti, a Sabines,
+        a cualquiera que haya escrito en hojas limpias.
+        Yo escribo sobre el hueso,
+        sobre la carne rota,
+        sobre la herida abierta de no tenerte.
+        
+        Este poema no tiene forma,
+        ni ritmo, ni altura.
+        Pero tiene algo que ninguno tiene:
+        la verdad cruda, feroz, absoluta.
+        
+        Yo te amo de forma impresentable,
+        te amo como grita el mar cuando nadie lo escucha.
+        Te amo en silencio,
+        te amo a gritos,
+        te amo aún si esto me arruina.
+        
+        Y si amar así
+        es escribir el peor poema del mundo...
+        entonces sí,
+        este es el peor poema del mundo.
+        
+        Pero juro, amor,
+        que es el único
+        que te ama de verdad.
+<button class="toggle-theme-personalizado" id="Elpeorpoemadelmundo">Audio del poema</button> 
+      </div>
+    </div>
+
+          <div class="poema">
+      <div class="titulo">cielo Azul</div>
+      <div class="texto">
+        Sé feliz con quien tú elijas,
+        con quien abraces sin miedo,
+        con quien no seas mentira
+        ni suspiro en el silencio.
+
+        Con quien rías de verdad,
+        con quien llores sin pretexto,
+        con quien te mire y entienda
+        lo que callas por dentro.
+
+        Porque yo...
+        yo solo fui un juego,
+        una pausa en tu camino,
+        la sombra de tu reflejo,
+        un atajo en tu destino.
+
+        Fui canción sin melodía,
+        fui abrigo en tu tormenta,
+        fui verdad entre tus dudas
+        y tú... tú fuiste mi condena.
+
+        Te entregué cada pedazo
+        de mi alma sin medida,
+        mientras tú buscabas otros
+        que llenaran tus heridas.
+
+        Yo soñaba con tu risa,
+        tú pensabas en su boca,
+        yo creía en el “nosotros”
+        y tú en amores de moda.
+
+        Fuiste libre entre mis manos
+        aunque yo moría en ellas,
+        te solté cuando querías
+        aunque me doliera.
+
+        Hoy te vas, sin despedida,
+        sin mirar lo que rompiste,
+        sin saber que en mis ruinas
+        aún tu nombre existe.
+
+        Y no, ya no te culpo,
+        el amor no se suplica,
+        pero qué cruel es saberse
+        reemplazo en tu vida.
+
+        Ahora sé que fui un pasatiempo,
+        una pausa en tu estación,
+        una historia entre paréntesis,
+        una nota sin canción.
+
+        Pero tú...
+        tú siempre serás recuerdo,
+        un suspiro que no vuelve,
+        un “tal vez” que no fue cierto,
+        un amor que nunca muere,
+<button class="toggle-theme" id="cieloAzul"">Audio del poema</button>
+      </div>
+    </div>
+
+    <div class="poema">
+      <div class="titulo">Te amo aunque me queme</div>
+      <div class="texto">
+        Te amo.
+        Así, sin más.
+        Sin medida, sin calma, sin paz.
+        Te amo como grita un loco en la noche,
+        como sangra un pecho sin broche.
+        Te amo aunque duela, aunque ya no estés,
+        aunque solo en mi mente te vea otra vez.
+
+        Te amo con rabia, con todo mi miedo,
+        con todo el silencio que a diario me quedo.
+        Te amo en los días que el alma no puede,
+        te amo en la herida que nunca se cede.
+
+        Y me desespera no tener tus manos,
+        no saber si piensas en mí de vez en cuando.
+        Porque esto no es cuento, ni es fantasía,
+        ¡yo te amo con fuerza, con sed, con agonía!
+
+        Tu piel morenita me habla en los sueños,
+        me abraza en el aire, se mete en mis ruegos.
+        Y yo… yo me ahogo en lo que no pasó,
+        en ese "amor y ya" que el tiempo borró.
+
+        Pero ¿cómo se borra un fuego tan fuerte?
+        ¿Cómo se arranca del pecho esta suerte?
+        Si en cada latido que late por mí,
+        hay un “te amo” que grita por ti.
+
+        Te amo cuando duermo y cuando me levanto,
+        te amo incluso cuando me haces daño.
+        Y aunque nunca dijiste que ibas a quedarte,
+        mi alma insistía en no soltarte.
+
+        Maldita esta forma en que yo te espero,
+        en que el mundo gira y yo me desespero.
+        Porque todo es gris si tú no estás,
+        porque tú eras calma, pero también eras paz.
+
+        Te amo y me duele.
+        Te amo y no entiendo
+        cómo amar tan fuerte si apenas te tengo.
+        Te amo y lo grito, aunque nadie escuche,
+        aunque mi garganta reviente y luche.
+
+        Si supieras las veces que he dicho tu nombre,
+        en la soledad, cuando nada responde...
+        Te amo, lo juro. ¡Te amo sin tregua!
+        ¡Aunque mi pecho se parta y se niega!
+
+        Quiero verte, tocarte, aunque sea en el viento,
+        decirte a la cara todo este tormento.
+        Pero no vienes… y yo me consumo,
+        como carta en fuego, como flor sin rumbo.
+
+        ¿Y tú? ¿Tú sabes que alguien te ama así?
+        ¿Que llora por ti sin verte venir?
+        No importa, no importa… yo aguanto el castigo,
+        ¡porque te amo! ¡y te amo conmigo!
+<button class="toggle-theme" id="Teamoaunquemequeme"">Audio del poema</button>
+      </div>
+    </div>
+
+    <div class="poema">
+      <div class="titulo">Si supieras..</div>
+      <div class="texto">
+        Si supieras lo que duele pronunciar tu nombre
+        cuando la noche me abraza sin que te nombre,
+        si vieras cómo me faltas cuando respiro,
+        como falta la voz… cuando ya no hay suspiro.
+
+        He dormido en el eco de tu mirada,
+        y aunque nunca fue mía, me supo a nada.
+        Porque hay amores que, sin ser vividos,
+        se quedan grabados como los más queridos.
+
+        Tu silencio pesa más que la distancia,
+        y aun así lo escucho con reverencia y constancia.
+        Es un silencio que canta, que late, que arde,
+        como un bolero triste, como un amor que no tarde.
+
+        Yo no quiero promesas que no se cumplan,
+        ni besos prestados que al alba se esfuman.
+        Quisiera tan solo vivir en tu huella,
+        como vive la luz en la sombra más bella.
+
+        Si supieras cuántas veces fui cobarde,
+        por no decirte “te amo”, aunque me arde.
+        Pero el alma calla lo que el pecho grita,
+        como guitarra muda que al amor invita.
+
+        Te amaré —lo juro— aunque nunca vengas,
+        aunque otros caminos tu paso entretengas.
+        Porque hay amores que no se presumen,
+        pero en cada lágrima... dulcemente, se asumen.
+
+        Y si un día la vida nos cruza de frente,
+        y tú me miras con ojos de gente,
+        yo sonreiré, como el que ha perdido,
+        pero que en el alma… siempre te ha tenido.
+<button class="toggle-theme" id="Sisupieras"">Audio del poema</button> 
+      </div>
+    </div>
+
+    <div class="poema">
+      <div class="titulo">Nadie ama así</div>
+      <div class="texto">
+        Perdóname por seguir aquí,
+        por seguir llamándote cuando el mundo ya no escucha.
+        Por seguir creyendo que un "te extraño" puede cambiar el destino,
+        cuando lo único que cambia…
+        es lo solo que me siento cada noche.
+
+        Te amo como un náufrago ama la idea del mar,
+        aunque el mar lo esté matando.
+        Te amo aunque tú no estés,
+        aunque ni siquiera preguntes si respiro.
+
+        Y sí…
+        yo daría mi voz, mi sangre,
+        mi historia completa por una caricia tuya.
+        Yo me arrodillaría en medio de la lluvia,
+        frente a todos,
+        gritaría tu nombre con los ojos cerrados
+        como si fuera una oración que me salvara de la muerte.
+
+        Nadie ama así.
+        Nadie ama llorando en la ducha,
+        abrazando la almohada como si fuera tu espalda.
+        Nadie se despierta cada día
+        con la única esperanza de soñar contigo esa noche.
+
+        Ya no sé si estoy vivo,
+        o si solo soy el eco de alguien
+        que te sigue esperando.
+<button class="toggle-theme" id="Nadieamaasi"">Audio del poema</button> 
+      </div>
+    </div>
+
+    <div class="poema">
+      <div class="titulo">Antes que Despiertes</div>
+      <div class="texto">
+        Cuando amanece,
+        mi primer pensamiento eres tú.
+        Eres la calma de mi mañana,
+        y la sonrisa que ilumina mis días.
+
+        Eres ese susurro de amor
+        que me recuerda que todo está bien,
+        esa mirada que abraza
+        cuando el mundo se siente frío.
+
+        Mi amor, mi misa, mi todo,
+        si supieras cuánto brillo le das a mi vida,
+        cuánto más bonito se ve el cielo
+        cuando pienso en ti.
+
+        Tú eres esa canción que no me canso de escuchar,
+        el refugio donde siempre quiero quedarme,
+        la historia que quiero seguir escribiendo,
+        día tras día, contigo.
+<button class="toggle-theme" id="Antesquedespiertes"">Audio del poema</button> 
+      </div>
+    </div>
+
+    <div class="poema">
+      <div class="titulo">Eras tú, antes de que supiera lo que buscaba</div>
+      <div class="texto">
+        No sabía que te buscaba,
+        hasta que tu nombre empezó a sonar en mi mente
+        como un susurro que no pedí,
+        pero que ya no quiero que se calle nunca.
+
+        No sabía que se podía pensar tanto en alguien,
+        hasta que apareciste tú,
+        como si el destino te hubiera dibujado
+        con la misma tinta con la que están hechos mis sueños.
+
+        No tengo palabras de poeta,
+        ni versos aprendidos en libros.
+        Lo único que tengo…
+        es este corazón que se desordena
+        cada vez que me escribes un "ayy".
+
+        Eras tú desde antes,
+        desde que yo no entendía
+        por qué algunas personas le sonríen al celular,
+        o por qué la luna a veces se siente más cerca.
+
+        Y ahora lo entiendo todo:
+        No era la luna… eras tú.
+        No era el día bonito… eras tú.
+        No era la canción que me gustaba… era lo que me hacía sentirte cerca.
+
+        No tengo táctica,
+        porque contigo no quiero jugar.
+        No tengo estrategia,
+        porque tú no eres una meta…
+        eres mi casa, mi calma, mi principio y mi destino.
+
+        Si hoy te despiertas y lees esto,
+        quiero que sepas que tu nombre
+        vive en todas las cosas que me hacen bien.
+        Y que si sonríes por mí, aunque sea un poquito…
+        ya gané todo lo que necesito.
+<button class="toggle-theme" id="Erastú,antesdequesupieraloquebuscaba"">Audio del poema</button> 
+      </div>
+    </div>
+
+    <div class="poema">
+      <div class="titulo">Estrategia de lo real</div>
+      <div class="texto">
+        No hay dudas, solo hechos, no me equivoqué al verte,
+        todo se alineó en la jugada, sin tener que perderte.
+        Cada palabra que dices es el movimiento clave,
+        en este juego de dos, tú eres la que sabe.
+
+        cuando te miro, lo tengo claro: lo quiero para siempre.
+        No necesito señales, ni mapas que me guíen,
+        tú eres la jugada, el movimiento que define.
+
+        No hay planes complicados, todo es natural,
+        somos como piezas en este tablero, más allá del bien y mal.
+        Tú tomas tu espacio, yo el mío, y lo que sale de aquí,
+        es lo que no se compra, lo que se siente, lo que es para mí.
+
+        No hay vuelta atrás, esto no es cuestión de azar,
+        es la táctica de mi alma, buscando en ti un lugar.
+        Jugada tras jugada, en el campo de esta mente,
+        te encontré, y ahora mi misión es verte siempre.
+<button class="toggle-theme" id="Estrategiadeloreal"">Audio del poema</button> 
+      </div>
+    </div>
+
+    <footer>
+      Hecho por Emiliano Hernández Navarrete💙 Con alma enamorada para el mundo | © 2025
+    </footer>
+  </div>
+
+  <script>
+    let hablando = false;
+
+function reproducir(texto) {
+  if (hablando) return; 
+
+  speechSynthesis.cancel(); 
+
+  const voz = new SpeechSynthesisUtterance(texto);
+  voz.lang = "es-MX";
+
+  hablando = true;
+  voz.onend = () => {
+    hablando = false;
+  };
+
+  speechSynthesis.speak(voz);
+}
+
+    function toggleTheme() {
+      const body = document.body;
+      const newTheme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      body.setAttribute('data-theme', newTheme);
+      loadParticles(); 
+    }
+
+    function loadParticles() {
+      const color = getComputedStyle(document.documentElement).getPropertyValue('--particle-color').trim();
+      tsParticles.load("tsparticles", {
+        background: { color: { value: "transparent" } },
+        fpsLimit: 60,
+        particles: {
+          color: { value: color },
+          links: {
+            color: color,
+            distance: 120,
+            enable: true,
+            opacity: 0.4,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 1.2,
+            direction: "none",
+            outModes: { default: "bounce" }
+          },
+          number: {
+            value: 55,
+            density: { enable: true, area: 800 }
+          },
+          opacity: { value: 0.6 },
+          shape: { type: "circle" },
+          size: { value: { min: 1, max: 4 } }
+        },
+        interactivity: {
+          events: {
+            onHover: { enable: true, mode: "repulse" },
+            resize: true
+          },
+          modes: {
+            repulse: { distance: 100 }
+          }
+        },
+        detectRetina: true
+      });
+    }
+
+    function limpiarTexto(texto) {
+      return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function resaltarCoincidencias(texto, busqueda) {
+      if (!busqueda) return texto;
+      
+      const regex = new RegExp(`(${busqueda})`, 'gi');
+      return texto.replace(regex, '<span class="highlight">$1</span>');
+    }
+
+    function filtrarPoemas() {
+      const input = document.getElementById("busqueda").value.toLowerCase();
+      const inputLimpio = limpiarTexto(input);
+      const poemas = document.querySelectorAll(".poema");
+      let encontrado = false;
+
+      if (input === "") {
+        poemas.forEach(poema => {
+          poema.style.display = "block";
+
+          const titulo = poema.querySelector(".titulo");
+          const texto = poema.querySelector(".texto");
+          titulo.innerHTML = titulo.textContent;
+          texto.innerHTML = texto.innerText;
+        });
+
+        const mensajeExistente = document.getElementById("mensajeNoEncontrado");
+        if (mensajeExistente) {
+          mensajeExistente.remove();
+        }
+        
+        return;
+      }
+
+      poemas.forEach(poema => {
+        const titulo = poema.querySelector(".titulo").innerText.toLowerCase();
+        const tituloLimpio = limpiarTexto(titulo);
+        const texto = poema.querySelector(".texto").innerText.toLowerCase();
+        const textoLimpio = limpiarTexto(texto);
+
+        if (tituloLimpio.includes(inputLimpio) || textoLimpio.includes(inputLimpio)) {
+          poema.style.display = "block";
+          encontrado = true;
+
+          const tituloElement = poema.querySelector(".titulo");
+          const textoElement = poema.querySelector(".texto");
+          
+          tituloElement.innerHTML = resaltarCoincidencias(tituloElement.innerText, input);
+          textoElement.innerHTML = resaltarCoincidencias(textoElement.innerText, input);
+        } else {
+          poema.style.display = "none";
+        }
+      });
+
+      const mensajeExistente = document.getElementById("mensajeNoEncontrado");
+      if (!encontrado) {
+        if (!mensajeExistente) {
+          const mensaje = document.createElement("div");
+          mensaje.id = "mensajeNoEncontrado";
+          mensaje.style.textAlign = "center";
+          mensaje.style.margin = "2rem auto";
+          mensaje.style.color = "var(--accent)";
+          mensaje.style.fontSize = "1.2rem";
+          mensaje.innerHTML = `No se encontraron poemas que contengan "<strong>${input}</strong>".`;
+          
+          const searchContainer = document.querySelector(".search-container");
+          searchContainer.parentNode.insertBefore(mensaje, searchContainer.nextSibling);
+        } else {
+          mensajeExistente.innerHTML = `No se encontraron poemas que contengan "<strong>${input}</strong>".`;
+        }
+      } else if (mensajeExistente) {
+        mensajeExistente.remove();
+      }
+    }
+
+    document.getElementById("busqueda").addEventListener("input", function() {
+      filtrarPoemas();
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      loadParticles();
+    });
+
+    document.getElementById("cieloAzul").addEventListener("click", function() {
+  const texto = `
+    Sé feliz con quien tú elijas,
+    con quien abraces sin miedo,
+    con quien no seas mentira
+    ni suspiro en el silencio.
+
+    Con quien rías de verdad,
+    con quien llores sin pretexto,
+    con quien te mire y entienda
+    lo que callas por dentro.
+
+    Porque yo...
+    yo solo fui un juego,
+    una pausa en tu camino,
+    la sombra de tu reflejo,
+    un atajo en tu destino.
+
+    Fui canción sin melodía,
+    fui abrigo en tu tormenta,
+    fui verdad entre tus dudas
+    y tú... tú fuiste mi condena.
+
+    Te entregué cada pedazo
+    de mi alma sin medida,
+    mientras tú buscabas otros
+    que llenaran tus heridas.
+
+    Yo soñaba con tu risa,
+    tú pensabas en su boca,
+    yo creía en el “nosotros”
+    y tú en amores de moda.
+
+    Fuiste libre entre mis manos
+    aunque yo moría en ellas,
+    te solté cuando querías
+    aunque me doliera.
+
+    Hoy te vas, sin despedida,
+    sin mirar lo que rompiste,
+    sin saber que en mis ruinas
+    aún tu nombre existe.
+
+    Y no, ya no te culpo,
+    el amor no se suplica,
+    pero qué cruel es saberse
+    reemplazo en tu vida.
+
+    Ahora sé que fui un pasatiempo,
+    una pausa en tu estación,
+    una historia entre paréntesis,
+    una nota sin canción.
+
+    Pero tú...
+    tú siempre serás recuerdo,
+    un suspiro que no vuelve,
+    un “tal vez” que no fue cierto,
+    un amor que nunca muere.
+  `;
+  reproducir(texto);
+});
+
+    document.getElementById("Teamoaunquemequeme").addEventListener("click", function() {
+  const texto = `
+    Te amo.
+    Así, sin más.
+    Sin medida, sin calma, sin paz.
+    Te amo como grita un loco en la noche,
+    como sangra un pecho sin broche.
+    Te amo aunque duela, aunque ya no estés,
+    aunque solo en mi mente te vea otra vez.
+
+    Te amo con rabia, con todo mi miedo,
+    con todo el silencio que a diario me quedo.
+    Te amo en los días que el alma no puede,
+    te amo en la herida que nunca se cede.
+
+    Y me desespera no tener tus manos,
+    no saber si piensas en mí de vez en cuando.
+    Porque esto no es cuento, ni es fantasía,
+    ¡yo te amo con fuerza, con sed, con agonía!
+
+    Tu piel morenita me habla en los sueños,
+    me abraza en el aire, se mete en mis ruegos.
+    Y yo… yo me ahogo en lo que no pasó,
+    en ese "amor y ya" que el tiempo borró.
+
+    Pero ¿cómo se borra un fuego tan fuerte?
+    ¿Cómo se arranca del pecho esta suerte?
+    Si en cada latido que late por mí,
+    hay un “te amo” que grita por ti.
+
+    Te amo cuando duermo y cuando me levanto,
+    te amo incluso cuando me haces daño.
+    Y aunque nunca dijiste que ibas a quedarte,
+    mi alma insistía en no soltarte.
+
+    Maldita esta forma en que yo te espero,
+    en que el mundo gira y yo me desespero.
+    Porque todo es gris si tú no estás,
+    porque tú eras calma, pero también eras paz.
+
+    Te amo y me duele.
+    Te amo y no entiendo
+    cómo amar tan fuerte si apenas te tengo.
+    Te amo y lo grito, aunque nadie escuche,
+    aunque mi garganta reviente y luche.
+
+    Si supieras las veces que he dicho tu nombre,
+    en la soledad, cuando nada responde...
+    Te amo, lo juro. ¡Te amo sin tregua!
+    ¡Aunque mi pecho se parta y se niega!
+
+    Quiero verte, tocarte, aunque sea en el viento,
+    decirte a la cara todo este tormento.
+    Pero no vienes… y yo me consumo,
+    como carta en fuego, como flor sin rumbo.
+
+    ¿Y tú? ¿Tú sabes que alguien te ama así?
+    ¿Que llora por ti sin verte venir?
+    No importa, no importa… yo aguanto el castigo,
+    ¡porque te amo! ¡y te amo conmigo!
+  `;
+  reproducir(texto);
+});
+
+    document.getElementById("Sisupieras").addEventListener("click", function() {
+  const texto = `
+    Si supieras lo que duele pronunciar tu nombre
+    cuando la noche me abraza sin que te nombre,
+    si vieras cómo me faltas cuando respiro,
+    como falta la voz… cuando ya no hay suspiro.
+
+    He dormido en el eco de tu mirada,
+    y aunque nunca fue mía, me supo a nada.
+    Porque hay amores que, sin ser vividos,
+    se quedan grabados como los más queridos.
+
+    Tu silencio pesa más que la distancia,
+    y aun así lo escucho con reverencia y constancia.
+    Es un silencio que canta, que late, que arde,
+    como un bolero triste, como un amor que no tarde.
+
+    Yo no quiero promesas que no se cumplan,
+    ni besos prestados que al alba se esfuman.
+    Quisiera tan solo vivir en tu huella,
+    como vive la luz en la sombra más bella.
+
+    Si supieras cuántas veces fui cobarde,
+    por no decirte “te amo”, aunque me arde.
+    Pero el alma calla lo que el pecho grita,
+    como guitarra muda que al amor invita.
+
+    Te amaré lo juro aunque nunca vengas,
+    aunque otros caminos tu paso entretengas.
+    Porque hay amores que no se presumen,
+    pero en cada lágrima... dulcemente, se asumen.
+
+    Y si un día la vida nos cruza de frente,
+    y tú me miras con ojos de gente,
+    yo sonreiré, como el que ha perdido,
+    pero que en el alma… siempre te ha tenido.
+  `;
+  reproducir(texto);
+});
+
+    document.getElementById("Nadieamaasi").addEventListener("click", function() {
+  const texto = `
+    Perdóname por seguir aquí,
+    por seguir llamándote cuando el mundo ya no escucha.
+    Por seguir creyendo que un "te extraño" puede cambiar el destino,
+    cuando lo único que cambia…
+    es lo solo que me siento cada noche.
+
+    Te amo como un náufrago ama la idea del mar,
+    aunque el mar lo esté matando.
+    Te amo aunque tú no estés,
+    aunque ni siquiera preguntes si respiro.
+
+    Y sí…
+    yo daría mi voz, mi sangre,
+    mi historia completa por una caricia tuya.
+    Yo me arrodillaría en medio de la lluvia,
+    frente a todos,
+    gritaría tu nombre con los ojos cerrados
+    como si fuera una oración que me salvara de la muerte.
+
+    Nadie ama así.
+    Nadie ama llorando en la ducha,
+    abrazando la almohada como si fuera tu espalda.
+    Nadie se despierta cada día
+    con la única esperanza de soñar contigo esa noche.
+
+    Ya no sé si estoy vivo,
+    o si solo soy el eco de alguien
+    que te sigue esperando.
+  `;
+  reproducir(texto);
+});
+
+    document.getElementById("Antesquedespiertes").addEventListener("click", function() {
+  const texto = `
+    Cuando amanece,
+    mi primer pensamiento eres tú.
+    Eres la calma de mi mañana,
+    y la sonrisa que ilumina mis días.
+
+    Eres ese susurro de amor
+    que me recuerda que todo está bien,
+    esa mirada que abraza
+    cuando el mundo se siente frío.
+
+    Mi amor, mi misa, mi todo,
+    si supieras cuánto brillo le das a mi vida,
+    cuánto más bonito se ve el cielo
+    cuando pienso en ti.
+
+    Tú eres esa canción que no me canso de escuchar,
+    el refugio donde siempre quiero quedarme,
+    la historia que quiero seguir escribiendo,
+    día tras día, contigo.
+  `;
+  reproducir(texto);
+});
+
+    document.getElementById("Elpeorpoemadelmundo").addEventListener("click", function() {
+  const texto = `
+    Dicen que esto no es amor.
+    Que es exceso. Que arde. Que enferma.
+    Que nadie puede amar así, sin defensa,
+    sin juicio, sin pausa, sin tregua.
+        
+    Pero yo te amo como nadie jamás te soñó,
+    no como un poeta,
+    sino como un universo que colapsa si no estás.
+        
+    Te amo sin metáforas.
+    Te amo sin "como".
+    Te amo más allá de las palabras que inventó el idioma.
+        
+    Te amo cuando no estás,
+    cuando no me recuerdas,
+    cuando tu sombra toca otra cama…
+    y aún así me hundo con los ojos cerrados
+    en el sabor imposible de tu nombre.
+        
+    Olvida a Neruda,
+    a Benedetti, a Sabines,
+    a cualquiera que haya escrito en hojas limpias.
+    Yo escribo sobre el hueso,
+    sobre la carne rota,
+    sobre la herida abierta de no tenerte.
+        
+    Este poema no tiene forma,
+    ni ritmo, ni altura.
+    Pero tiene algo que ninguno tiene:
+    la verdad cruda, feroz, absoluta.
+        
+    Yo te amo de forma impresentable,
+    te amo como grita el mar cuando nadie lo escucha.
+    Te amo en silencio,
+    te amo a gritos,
+    te amo aún si esto me arruina.
+        
+    Y si amar así
+    es escribir el peor poema del mundo...
+    entonces sí,
+    este es el peor poema del mundo.
+        
+    Pero juro, amor,
+    que es el único
+    que te ama de verdad.
+  `;
+  reproducir(texto);
+});
+
+    document.getElementById("Erastú,antesdequesupieraloquebuscaba").addEventListener("click", function() {
+  const texto = `
+    No sabía que te buscaba,
+    hasta que tu nombre empezó a sonar en mi mente
+    como un susurro que no pedí,
+    pero que ya no quiero que se calle nunca.
+
+    No sabía que se podía pensar tanto en alguien,
+    hasta que apareciste tú,
+    como si el destino te hubiera dibujado
+    con la misma tinta con la que están hechos mis sueños.
+
+    No tengo palabras de poeta,
+    ni versos aprendidos en libros.
+    Lo único que tengo…
+    es este corazón que se desordena
+    cada vez que me escribes un "ayy".
+
+    Eras tú desde antes,
+    desde que yo no entendía
+    por qué algunas personas le sonríen al celular,
+    o por qué la luna a veces se siente más cerca.
+
+    Y ahora lo entiendo todo:
+    No era la luna… eras tú.
+    No era el día bonito… eras tú.
+    No era la canción que me gustaba… era lo que me hacía sentirte cerca.
+
+    No tengo táctica,
+    porque contigo no quiero jugar.
+    No tengo estrategia,
+    porque tú no eres una meta…
+    eres mi casa, mi calma, mi principio y mi destino.
+
+    Si hoy te despiertas y lees esto,
+    quiero que sepas que tu nombre
+    vive en todas las cosas que me hacen bien.
+    Y que si sonríes por mí, aunque sea un poquito…
+    ya gané todo lo que necesito.
+  `;
+  reproducir(texto);
+});
+
+    document.getElementById("Estrategiadeloreal").addEventListener("click", function() {
+  const texto = `
+    No hay dudas, solo hechos, no me equivoqué al verte,
+    todo se alineó en la jugada, sin tener que perderte.
+    Cada palabra que dices es el movimiento clave,
+    en este juego de dos, tú eres la que sabe.
+
+    cuando te miro, lo tengo claro: lo quiero para siempre.
+    No necesito señales, ni mapas que me guíen,
+    tú eres la jugada, el movimiento que define.
+
+    No hay planes complicados, todo es natural,
+    somos como piezas en este tablero, más allá del bien y mal.
+    Tú tomas tu espacio, yo el mío, y lo que sale de aquí,
+    es lo que no se compra, lo que se siente, lo que es para mí.
+
+    No hay vuelta atrás, esto no es cuestión de azar,
+    es la táctica de mi alma, buscando en ti un lugar.
+    Jugada tras jugada, en el campo de esta mente,
+    te encontré, y ahora mi misión es verte siempre.
+  `;
+  reproducir(texto);
+});
+
+    document.getElementById("Enlamemoriadelalma").addEventListener("click", function() {
+  const texto = `
+    No te vi jamás en carne,
+    pero en el viento escuché
+    tu voz firme, tu mirada,
+    la luz que nunca se fue.
+
+    Maestra de silencios,
+    que faltó regañar quizás,
+    pero enseñaste con alma
+    más de lo que se puede hablar.
+
+    Quisiste guiar caminos,
+    abrir puertas y sembrar,
+    y aunque el tiempo te llevó
+    tu esencia no va a acabar.
+
+    Porque no se olvida lo grande,
+    ni el amor que supiste dar,
+    la huella que dejaste en el alma,
+    permanecerá sin cesar.
+
+    Fuiste faro en la noche,
+    luz que no sabe morir,
+    maestra que en el recuerdo
+    sigue siempre por venir.
+
+    No estás, pero no te pierdes,
+    tu nombre es inmortal,
+    y en cada corazón que tocaste,
+    vivirás sin final.
+  `;
+  reproducir(texto);
+});
+
+  </script>
+</body>
+</html>
