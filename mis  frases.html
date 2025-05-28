@@ -282,12 +282,14 @@
   </div>
 
   <script>
-    let hablando = false;
+let hablando = false;
 
 function reproducir(texto) {
-  if (hablando) return; 
-
-  speechSynthesis.cancel(); 
+  if (hablando) {
+    speechSynthesis.cancel(); 
+    hablando = false; 
+    return; 
+  }
 
   const voz = new SpeechSynthesisUtterance(texto);
   voz.lang = "es-MX";
