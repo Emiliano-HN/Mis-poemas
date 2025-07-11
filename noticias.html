@@ -1,320 +1,364 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noticias Oficiales</title>
-    <link rel="icon" href="icono.png" type="logo-Zave_rn">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Noticias Poéticas - El Periódico del Alma</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Courier+Prime:wght@400;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
-
+        
         body {
-            background-color: #111;
-            color: #fff;
-            font-family: 'Poppins', sans-serif;
-            user-select: none;
-            -webkit-user-select: none; 
-            -moz-user-select: none; 
-            -ms-user-select: none;
-    }
-
-        /* ENCABEZADO */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 60px;
-            background-color: #000;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            z-index: 10;
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(135deg, #2c1810 0%, #4a2c2a 25%, #1a1a1a 50%, #2c1810 75%, #4a2c2a 100%);
+            color: #f5f5dc;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
-
-        .logo {
-            font-size: 28px;
-            font-weight: 700;
-            font-family: 'Playfair Display', serif;
-            color: #C19A6B;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #C19A6B;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #fff;
-        }
-
-        /* SECCIONES */
-        .section {
-            display: none;
-            padding: 50px 10%;
-            text-align: center;
-        }
-
-        #home {
-            display: block;
-        }
-
-        /* HERO SECTION */
-        .hero {
-            height: 75vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background-color: #000;
-            color: #fff;
-            padding: 20px;
-        }
-
-        .hero-content {
-            max-width: 700px;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 40px;
-            border-radius: 10px;
-        }
-
-        .hero h1 {
-            font-size: 50px;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .hero p {
-            font-size: 18px;
-            margin-top: 10px;
-            opacity: 0.8;
-        }
-
-        .cta-btn {
-            margin-top: 20px;
-            background: #C19A6B;
-            color: white;
-            padding: 12px 35px;
-            font-size: 16px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: background 0.3s;
-            font-weight: 600;
-        }
-
-        .cta-btn:hover {
-            background: white;
-            color: #C19A6B;
-            border: 2px solid #C19A6B;
-        }
-
-        /* SECCIÓN DE DISEÑADORES */
-        .designers h2 {
-            font-size: 38px;
-            font-family: 'Playfair Display', serif;
-            margin-bottom: 50px;
-            color: #fff;
-        }
-
-        .designer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .designer-card {
-            background: #222;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
-        }
-
-        .designer-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .designer-name {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #C19A6B;
-        }
-
-        .designer-desc {
-            font-size: 14px;
-            opacity: 0.7;
-            color: #ddd;
-        }
-
-        .contact-btn {
-            background: #C19A6B;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background 0.3s;
-            font-weight: 600;
-            margin-top: 10px;
-        }
-
-        .contact-btn:hover {
-            background: white;
-            color: #C19A6B;
-            border: 2px solid #C19A6B;
-        }
-
-        /* FORMULARIO DE CONTRATACIÓN */
-        .hire-section {
-            display: none;
-            padding: 50px 10%;
-            background-color: #000;
-        }
-
-        .hire-form {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 40px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .hire-form input, .hire-form textarea {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            background: #222;
-            border: 1px solid #C19A6B;
-            border-radius: 5px;
-            color: #fff;
-            font-size: 16px;
-        }
-
-        .hire-form button {
-            background: #C19A6B;
-            color: white;
-            padding: 12px 35px;
-            font-size: 16px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 10px;
-            font-weight: 600;
-        }
-
-        .hire-form button:hover {
-            background: white;
-            color: #C19A6B;
-            border: 2px solid #C19A6B;
-        }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #000;
-            color: white;
-            font-size: 14px;
-        }
-
-        /* MODAL (Ventana Emergente) */
-        .modal {
-            display: none;
+        
+        .newspaper-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 49px,
+                    rgba(139, 69, 19, 0.03) 50px,
+                    rgba(139, 69, 19, 0.03) 51px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 24px,
+                    rgba(139, 69, 19, 0.02) 25px,
+                    rgba(139, 69, 19, 0.02) 26px
+                );
+            z-index: -1;
         }
-
-        .modal-content {
-            background: #222;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 700px;
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 4px double #8b4513;
+            background: rgba(139, 69, 19, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .newspaper-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: #d2691e;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            margin-bottom: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+        
+        .newspaper-subtitle {
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.2rem;
+            color: #deb887;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .date-edition {
+            font-size: 1rem;
+            color: #cd853f;
+            margin-bottom: 10px;
+        }
+        
+        .breaking-news {
+            background: #8b0000;
             color: #fff;
+            padding: 10px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            animation: blink 2s infinite;
         }
-
-        .modal-close {
-            background: #C19A6B;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .main-news {
+            background: rgba(139, 69, 19, 0.1);
+            border: 2px solid #8b4513;
+            border-radius: 10px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .main-news:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(139, 69, 19, 0.3);
+            border-color: #d2691e;
+        }
+        
+        .news-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #d2691e;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .news-subtitle {
+            font-size: 1.2rem;
+            color: #deb887;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .news-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #f5f5dc;
+            text-align: justify;
+        }
+        
+        .news-content p {
+            margin-bottom: 15px;
+        }
+        
+        .news-meta {
             margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #8b4513;
+            font-size: 0.9rem;
+            color: #deb887;
+            font-style: italic;
         }
-
-        .modal-close:hover {
-            background: white;
-            color: #C19A6B;
-            border: 2px solid #C19A6B;
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
-
+        
+        .sidebar-section {
+            background: rgba(160, 82, 45, 0.1);
+            border: 1px solid #8b4513;
+            border-radius: 10px;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-section:hover {
+            background: rgba(160, 82, 45, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .sidebar-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #ff8c00;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 2px solid #8b4513;
+            padding-bottom: 10px;
+        }
+        
+        .sidebar-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #f5f5dc;
+        }
+        
+        .news-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .news-column {
+            background: rgba(139, 69, 19, 0.08);
+            border: 1px solid #8b4513;
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .news-column:hover {
+            background: rgba(139, 69, 19, 0.12);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.2);
+        }
+        
+        .column-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #d2691e;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .column-headline:hover {
+            color: #ff8c00;
+        }
+        
+        .column-content {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #f5f5dc;
+        }
+        
+        .weather-section {
+            background: linear-gradient(135deg, rgba(25, 25, 112, 0.2), rgba(70, 130, 180, 0.2));
+            border: 2px solid #4682b4;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .weather-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #87ceeb;
+            margin-bottom: 15px;
+        }
+        
+        .weather-content {
+            font-size: 1.1rem;
+            color: #f5f5dc;
+            line-height: 1.6;
+        }
+        
+        .classified-section {
+            background: rgba(139, 69, 19, 0.05);
+            border: 2px dashed #8b4513;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .classified-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #d2691e;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .classified-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .classified-item {
+            background: rgba(160, 82, 45, 0.1);
+            border: 1px solid #8b4513;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .classified-category {
+            font-weight: bold;
+            color: #ff8c00;
+            margin-bottom: 8px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px 0;
+            border-top: 3px double #8b4513;
+            color: #deb887;
+            font-style: italic;
+        }
+        
+        @keyframes titleGlow {
+            0% { text-shadow: 3px 3px 6px rgba(0,0,0,0.7), 0 0 20px rgba(210, 105, 30, 0.3); }
+            100% { text-shadow: 3px 3px 6px rgba(0,0,0,0.7), 0 0 30px rgba(210, 105, 30, 0.6); }
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+        
+        @media (max-width: 768px) {
+            .newspaper-title {
+                font-size: 2.5rem;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .news-headline {
+                font-size: 2rem;
+            }
+            
+            .news-columns {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-
-<header>
-    <div class="logo">Noticas de la pagina web</div>
-    <nav class="nav-links">
-        <a onclick="showSection()">Cada actualizacion será a partir de las 0:00hrs</a>
-</header>
-
-<!-- Sección de Inicio -->
-<div id="home" class="section">
-    <div class="hero">
-        <div class="hero-content">
-            <h1 class="logo">Noticias Oficiales</h1>
-            <p>- La página dejará de actualizarce menos por motivos personales del creador. </p>
+    <div class="newspaper-bg"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="newspaper-title">El Periódico</h1>
+            <p class="newspaper-subtitle">Noticias que importan al corazón</p>
+            <p class="date-edition">Ultima actualización: Viernes 11 de julio de 2025</p>
+        </header>
+        <div class="classified-section">
+            <h2 class="classified-title">Actualizaciones</h2>
+            <div class="classified-grid">
+                <div class="classified-item">
+                    <div class="classified-category">Triste noticia...</div>
+                    <p>Las actualizacion seran menos constantes.. motivos personales del creador.</p>
+                </div>
+                
+                <div class="classified-item">
+                    <div class="classified-category">Nuevo poema</div>
+                    <p>Nuevo poema llamado "Te a querer" con audio incluido.</p>
+                </div>
+            </div>
         </div>
+        
+        <footer class="footer">
+            <p>"Las mejores noticias son las que escribe el corazón"</p>
+            <p>— El Periódico del Alma • Circulación: Infinita • Precio: Gratuito para almas sensibles —</p>
+        </footer>
     </div>
-</div>
-
-<footer>
-    <p>&copy; 2025 Emiliano Hernández. Todos los derechos reservados.</p>
-</footer>
-
-<script>
-    function showSection(sectionId) {
-        const sections = document.querySelectorAll('.section');
-        sections.forEach(section => {
-            section.style.display = 'none';
-        });
-        document.getElementById(sectionId).style.display = 'block';
-    }
-
-    function openModal(name, description, code) {
-        document.getElementById('modal-title').textContent = name;
-        document.getElementById('modal-description').textContent = description;
-        document.getElementById('modal-code').textContent = code;
-        document.getElementById('modal').style.display = 'flex';
-    }
-
-    function closeModal() {
-        document.getElementById('modal').style.display = 'none';
-    }
-</script>
-
 </body>
 </html>
