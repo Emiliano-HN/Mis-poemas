@@ -248,10 +248,17 @@
       <input type="text" id="busqueda" placeholder="Escribe para buscar frases..." autocomplete="off">
     </div>
 
-        <div class="poema gold">
+              <div class="poema gold">
+      <div class="titulo-personalizado">El baile que no prometieron</div>
+      <div class="texto">No es el baile que soñamos, ni la canción que esperábamos. Es ruido, es caos, es fragilidad puesta a prueba. Pero mientras el corazón siga latiendo en este suelo roto, bailamos. Bailamos para no caer, para no rendirnos, para estar vivos.
+      <button class="toggle-theme-personalizado" id="Elbailequenoprometieron"">Audio de las frases</button> 
+      </div>
+    </div>
+
+        <div class="poema">
       <div class="titulo-personalizado">Formar para el Pensamiento, No para la Obediencia</div>
       <div class="texto">Un maestro real no guía pasos, desordena el suelo para que el caminante construya su propio camino. Porque enseñar no es dejar huella, es borrar el miedo a pisar.
-      <button class="toggle-theme-personalizado" id="FormarparaelPensamiento,NoparalaObediencia"">Audio de las frases</button> 
+      <button class="toggle-theme" id="FormarparaelPensamiento,NoparalaObediencia"">Audio de las frases</button> 
       </div>
     </div>
 
@@ -458,7 +465,13 @@ function reproducir(texto) {
     document.getElementById("NoEsOlvido,EsMuerteLenta").addEventListener("click", function() {
   const texto = `
     Temo más a la calma sin ti que al dolor de perderte, porque si un día mi pecho ya no tiembla con tu nombre… sabré que lo nuestro no murió, solo se pudrió en mi silencio.
-  `;
+  `; 
+  reproducir(texto);
+});
+    document.getElementById("Elbailequenoprometieron").addEventListener("click", function() {
+  const texto = `
+    No es el baile que soñamos, ni la canción que esperábamos. Es ruido, es caos, es fragilidad puesta a prueba. Pero mientras el corazón siga latiendo en este suelo roto, bailamos. Bailamos para no caer, para no rendirnos, para estar vivos.
+  `; 
   reproducir(texto);
 });
 
